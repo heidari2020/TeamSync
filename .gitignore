@@ -1,0 +1,19 @@
+# .NET Build results
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Rider
+.idea/
+
+# Environment & Secrets 
+appsettings.Development.json
+*.env
+
+# Docker
+postgres-data/
