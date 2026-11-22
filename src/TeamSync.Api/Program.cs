@@ -1,8 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using TeamSync.Api.Data;
 using System.Reflection;
 using FluentValidation;
-using MediatR;
+using Microsoft.EntityFrameworkCore;
+using TeamSync.Api.Data;
+using TeamSync.Api.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,13 +13,13 @@ builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.Get
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-builder.Services.AddControllers();
+builder.Services.AddScoped<IJwtProvider, JwtProvider>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -28,6 +28,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
-app.MapControllers();
+TeamSync.Api.Features.Auth.Register.RegisterEndpoint.MapRegisterEndpoint(app);
 
 app.Run();

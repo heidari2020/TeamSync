@@ -1,6 +1,7 @@
-﻿namespace TeamSync.Api.Common
+﻿using TeamSync.Api.Domain;
+
+namespace TeamSync.Api.Common;
+public interface IJwtProvider
 {
-    public interface Interface
-    {
-    }
+    string Generate(User user);
 }
